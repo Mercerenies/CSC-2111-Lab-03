@@ -1,12 +1,18 @@
 #include "Password.h"
 using CSC2110::ListArrayIterator;
+using CSC2110::String;
+using CSC2110::ListArray;
 
 #include <iostream>
 using namespace std;
 
+Password::Password()
+    : viable_words(new ListArray<String>), all_words(new ListArray<String>) {}
 
-
-
+Password::~Password() {
+    delete viable_words , viable_words = 0;
+    delete all_words , all_words = 0;
+}
 
 
 
