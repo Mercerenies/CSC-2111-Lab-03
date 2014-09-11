@@ -119,6 +119,35 @@ int Password::bestGuess()
    return best_guess_index;  //return a 1-based index into the all_words list of words (careful)
 }
 
+void Password::displayViableWords()
+{
+     //this needs to pull from the list of most probable passwords
+     ListArrayIterator<String>* viable = viable_words->iterator();
+     
+     while(viable->hasNext()) {
+            viable->next()->displayString();   
+     }
+}
+
+String* Password::getOriginalWord(int index)
+{
+    ListArrayIterator<String>* all = all_words->iterator();
+    String* originalWord = 0;
+    String* currentWord = 0;
+    
+    int i = 0;
+    while(all->hasNext())
+    {
+        currentWord = all->next();
+        if (i == index)
+        {
+           originalWord = currentWord;
+           return originalWord;
+        }              
+        i++;                          
+    }
+}
+
 int Password::getNumMatches(String* curr_word, String* word_guess) {
     
     auto fst = curr_word->getText();
