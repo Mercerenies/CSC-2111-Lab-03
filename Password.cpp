@@ -1,4 +1,5 @@
 #include "Password.h"
+#include <iterator>
 using CSC2110::ListArrayIterator;
 using CSC2110::String;
 using CSC2110::ListArray;
@@ -30,7 +31,15 @@ Password::~Password() {
     delete all_words , all_words = 0;
 }
 
+void Password::addWord(String* word) {
+    viable_words->add(word);
+    all_words->add(word);
+}
 
+void Password::guess(int try_password, int num_matches) {
+    String* password = all_words->get(try_password);
+    
+}
 
 
 
@@ -96,4 +105,21 @@ int Password::bestGuess()
 
    delete all_iter;
    return best_guess_index;  //return a 1-based index into the all_words list of words (careful)
+}
+
+int Password::getNumMatches(String* curr_word, String* word_guess) {
+    
+    auto fst = curr_word->getText();
+    auto snd = word_guess->getText();
+    
+    int eql = 0;
+    while ((*fst != 0) && (*snd != 0)) {
+        if (*fst == *snd)
+            eql++;
+        fst++;
+        snd++;
+    }
+    
+    return eql;
+    
 }
