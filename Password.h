@@ -20,6 +20,11 @@ class Password
     Password();
     ~Password();
     int bestGuess();
+    void addWord(CSC2110::String* word);
+    void guess(int try_password, int num_matches);
+    int getNumberOfPasswordsLeft();
+    void displayViableWords();
+    CSC2110::String* getOriginalWord(int index);
 
 };
 

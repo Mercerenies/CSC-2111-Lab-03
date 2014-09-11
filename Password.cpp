@@ -10,6 +10,22 @@ Password::Password()
     : viable_words(new ListArray<String>), all_words(new ListArray<String>) {}
 
 Password::~Password() {
+    
+    auto a_it = viable_words->iterator();
+    auto v_it = viable_words->iterator();
+    
+    String* str;
+    
+    while (a_it->hasNext()) {
+        str = a_it->next();
+        delete str , str = 0;
+    }
+    
+    while (v_it->hasNext()) {
+        str = v_it->next();
+        delete str , str = 0;
+    }
+    
     delete viable_words , viable_words = 0;
     delete all_words , all_words = 0;
 }
