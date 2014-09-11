@@ -39,9 +39,21 @@ void Password::addWord(String* word) {
 void Password::guess(int try_password, int num_matches) {
     String* password = all_words->get(try_password);
     
+    // NOTE: A get-based for loop is favored here, as using an iterator
+    //       would result in potentially undefined side effects while
+    //       removing elements.
+    int len = viable_words->size();
+    for (int i = 0; i < len; i++) {
+        if (getNumMatches(viable_words->get(i), password) == num_matches) {
+            viable_words->remove(i);
+            i--; // Make sure not to skip an element considering we just deleted one
+        }
+    }
 }
 
-
+int Password::getNumberOfPasswordsLeft() {
+    return viable_words->size();
+}
 
 
 
