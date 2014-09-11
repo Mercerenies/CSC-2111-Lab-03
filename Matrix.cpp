@@ -5,6 +5,8 @@ using CSC2110::Matrix;
 #include <iostream>
 using namespace std;
 
+//lol
+
 int Matrix::getNumRows()
 {
    return rows;
