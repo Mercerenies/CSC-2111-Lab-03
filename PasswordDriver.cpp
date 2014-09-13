@@ -1,5 +1,9 @@
+//https://github.com/Mercerenies/CSC-2111-Lab-03
+
 #include "Password.h"
-//fill in includes, don't forget namespaces
+#include "Keyboard.h"
+#include "ReadFile.h"
+using namespace CSC2110;
 
 #include <iostream>
 using namespace std;
@@ -61,4 +65,5 @@ int main()
    addWords(fallout);
    guessWords(fallout);
    delete fallout;
+   return 0;
 }

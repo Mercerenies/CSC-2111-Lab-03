@@ -11,9 +11,8 @@ Password::Password()
     : viable_words(new ListArray<String>), all_words(new ListArray<String>) {}
 
 Password::~Password() {
-    
-    auto a_it = viable_words->iterator();
-    auto v_it = viable_words->iterator();
+    auto a_it = all_words->iterator();
+    //auto v_it = viable_words->iterator();
     
     String* str;
     
@@ -22,10 +21,12 @@ Password::~Password() {
         delete str , str = 0;
     }
     
+    /* // This block of code should NOT be executed, as the elements therein are already deleted from all_words
     while (v_it->hasNext()) {
         str = v_it->next();
         delete str , str = 0;
     }
+    */
     
     delete viable_words , viable_words = 0;
     delete all_words , all_words = 0;
@@ -42,9 +43,8 @@ void Password::guess(int try_password, int num_matches) {
     // NOTE: A get-based for loop is favored here, as using an iterator
     //       would result in potentially undefined side effects while
     //       removing elements.
-    int len = viable_words->size();
-    for (int i = 0; i < len; i++) {
-        if (getNumMatches(viable_words->get(i), password) == num_matches) {
+    for (int i = 1; i <= viable_words->size(); i++) {
+        if (getNumMatches(viable_words->get(i), password) != num_matches) {
             viable_words->remove(i);
             i--; // Make sure not to skip an element considering we just deleted one
         }
@@ -110,7 +110,6 @@ int Password::bestGuess()
          best_num_eliminated = num_eliminated;
          best_guess_index = count;
       }
-      
       count++;
       delete[] count_num_matches;
    }
@@ -126,30 +125,16 @@ void Password::displayViableWords()
      
      while(viable->hasNext()) {
             viable->next()->displayString();   
+            cout << endl;
      }
 }
 
 String* Password::getOriginalWord(int index)
 {
-    ListArrayIterator<String>* all = all_words->iterator();
-    String* originalWord = 0;
-    String* currentWord = 0;
-    
-    int i = 0;
-    while(all->hasNext())
-    {
-        currentWord = all->next();
-        if (i == index)
-        {
-           originalWord = currentWord;
-           return originalWord;
-        }              
-        i++;                          
-    }
+    return all_words->get(index);
 }
 
 int Password::getNumMatches(String* curr_word, String* word_guess) {
-    
     auto fst = curr_word->getText();
     auto snd = word_guess->getText();
     

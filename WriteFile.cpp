@@ -1,6 +1,8 @@
 #include "WriteFile.h"
 #include <sstream>
 
+namespace CSC2110 {
+
 WriteFile::WriteFile(const char* file_name)
 {
    output_file = new ofstream();
@@ -29,4 +31,6 @@ void WriteFile::writeLine(String* line)
    {
       *output_file << line->getText() << endl;
    }
+}
+
 }

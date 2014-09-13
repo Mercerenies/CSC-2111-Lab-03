@@ -4,7 +4,8 @@
 #include "Text.h"
 #include "ListArray.h"
 
-//complete the includes
+// NOTE: The seemingly extraneous "CSC2110::" is used, as a "using CSC2110;" declaration
+//       would leak into any files that include this header, which may be undesired.
 
 class Password
 {
